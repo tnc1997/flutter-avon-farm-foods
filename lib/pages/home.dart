@@ -1,3 +1,4 @@
+import 'package:avon_farm_foods/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -68,6 +69,7 @@ class _HomePageState extends State<HomePage> {
         ],
         padding: new EdgeInsets.all(16.0),
       ),
+      drawer: new DrawerWidget(),
     );
   }
 }
