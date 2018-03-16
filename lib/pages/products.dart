@@ -1,4 +1,5 @@
 import 'package:avon_farm_foods/models/product.dart';
+import 'package:avon_farm_foods/types/predicate.dart';
 import 'package:avon_farm_foods/widgets/drawer.dart';
 import 'package:avon_farm_foods/widgets/predicate_tab.dart';
 import 'package:avon_farm_foods/widgets/product_card.dart';
@@ -10,6 +11,8 @@ class ProductsPage extends StatefulWidget {
 }
 
 class _ProductsPageState extends State<ProductsPage> {
+  bool _isSearching = false;
+
   final List<Product> _products = [
     new Product(
       description:
@@ -59,6 +62,20 @@ class _ProductsPageState extends State<ProductsPage> {
     ),
   ];
 
+  static final TextEditingController _searchQuery = new TextEditingController();
+  static final Predicate<Product> _searchQueryPredicate = (Product product) {
+    if (_searchQuery.text.isEmpty) {
+      return true;
+    } else {
+      return product.name.contains(
+        new RegExp(
+          _searchQuery.text,
+          caseSensitive: false,
+        ),
+      );
+    }
+  };
+
   final List<PredicateTabWidget<Product>> _tabs = [
     new PredicateTabWidget(
       icon: new Icon(Icons.thumb_up),
@@ -72,10 +89,31 @@ class _ProductsPageState extends State<ProductsPage> {
     )
   ];
 
+  List<Widget> _buildActions() {
+    return [
+      new IconButton(
+        icon: new Icon(Icons.search),
+        onPressed: _handleSearchBegin,
+        tooltip: 'Search',
+      ),
+    ];
+  }
+
+  AppBar _buildAppBar() {
+    return new AppBar(
+      actions: _buildActions(),
+      bottom: _buildTabBar(),
+      title: new Text('Products'),
+    );
+  }
+
   TabBarView _buildTabBarView() {
     return new TabBarView(
       children: _tabs.map((PredicateTabWidget<Product> tab) {
-        return _products.where(tab.predicate).toList();
+        return _products
+            .where(tab.predicate)
+            .where(_searchQueryPredicate)
+            .toList();
       }).map((List<Product> products) {
         return new ListView.builder(
           itemBuilder: (BuildContext context, int index) {
@@ -107,17 +145,47 @@ class _ProductsPageState extends State<ProductsPage> {
     );
   }
 
+  AppBar _buildSearchBar() {
+    return new AppBar(
+      bottom: _buildTabBar(),
+      leading: new BackButton(),
+      title: new TextField(
+        autofocus: true,
+        controller: _searchQuery,
+        decoration: new InputDecoration(
+          hintText: 'Search by product name',
+        ),
+      ),
+    );
+  }
+
+  TabBar _buildTabBar() {
+    return new TabBar(
+      indicatorColor: Theme.of(context).iconTheme.color,
+      tabs: _tabs,
+    );
+  }
+
+  void _handleSearchBegin() {
+    ModalRoute.of(context).addLocalHistoryEntry(new LocalHistoryEntry(
+      onRemove: () {
+        setState(() {
+          _isSearching = false;
+          _searchQuery.clear();
+        });
+      },
+    ));
+
+    setState(() {
+      _isSearching = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new DefaultTabController(
       child: new Scaffold(
-        appBar: new AppBar(
-          bottom: new TabBar(
-            indicatorColor: Theme.of(context).iconTheme.color,
-            tabs: _tabs,
-          ),
-          title: new Text('Products'),
-        ),
+        appBar: _isSearching ? _buildSearchBar() : _buildAppBar(),
         body: _buildTabBarView(),
         drawer: new DrawerWidget(),
       ),
