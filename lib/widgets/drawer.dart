@@ -6,27 +6,27 @@ class DrawerWidget extends StatelessWidget {
   final List<Page> _pages = [
     new Page(
       icon: new Icon(Icons.home),
-      route: 'home',
+      route: '/',
       title: 'Home',
     ),
     new Page(
       icon: new Icon(Icons.search),
-      route: 'products',
+      route: '/products',
       title: 'Products',
     ),
     new Page(
       icon: new Icon(Icons.shopping_basket),
-      route: 'basket',
+      route: '/basket',
       title: 'Basket',
     ),
     new Page(
       icon: new Icon(Icons.receipt),
-      route: 'orders',
+      route: '/orders',
       title: 'Orders',
     ),
     new Page(
       icon: new Icon(Icons.settings),
-      route: 'settings',
+      route: '/settings',
       title: 'Settings',
     ),
   ];
