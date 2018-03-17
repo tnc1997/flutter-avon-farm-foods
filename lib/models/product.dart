@@ -1,4 +1,4 @@
-class Product {
+class Product implements Comparable<Product> {
   Product({
     this.description,
     this.id,
@@ -6,6 +6,7 @@ class Product {
     this.isInBasket = false,
     this.name,
     this.price,
+    this.quantity = 0,
     this.url,
   });
 
@@ -17,4 +18,11 @@ class Product {
 
   bool isFavourite;
   bool isInBasket;
+  int quantity;
+
+  @override
+  int compareTo(Product other) => id - other.id;
+
+  bool operator ==(other) => other is Product && other.id == id;
+  int get hashCode => id.hashCode;
 }

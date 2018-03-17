@@ -90,6 +90,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_flux:
+    dependency: "direct main"
+    description:
+      path: "..\\flutter_flux"
+      relative: true
+    source: path
+    version: "4.0.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
