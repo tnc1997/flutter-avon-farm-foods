@@ -1,17 +1,37 @@
 import 'package:avon_farm_foods/models/product.dart';
+import 'package:avon_farm_foods/stores/basket.dart';
 import 'package:avon_farm_foods/types/predicate.dart';
 import 'package:avon_farm_foods/widgets/drawer.dart';
 import 'package:avon_farm_foods/widgets/predicate_tab.dart';
 import 'package:avon_farm_foods/widgets/product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_flux/flutter_flux.dart';
 
 class ProductsPage extends StatefulWidget {
   @override
   _ProductsPageState createState() => new _ProductsPageState();
 }
 
-class _ProductsPageState extends State<ProductsPage> {
+class _ProductsPageState extends State<ProductsPage>
+    with StoreWatcherMixin<ProductsPage> {
+  _ProductsPageState() {
+    _searchQueryPredicate = (Product product) {
+      if (_searchQuery.text.isEmpty) {
+        return true;
+      } else {
+        return product.name.contains(
+          new RegExp(
+            _searchQuery.text,
+            caseSensitive: false,
+          ),
+        );
+      }
+    };
+  }
+
+  BasketStore _basketStore;
   bool _isSearching = false;
+  Predicate<Product> _searchQueryPredicate;
 
   final List<Product> _products = [
     new Product(
@@ -62,19 +82,7 @@ class _ProductsPageState extends State<ProductsPage> {
     ),
   ];
 
-  static final TextEditingController _searchQuery = new TextEditingController();
-  static final Predicate<Product> _searchQueryPredicate = (Product product) {
-    if (_searchQuery.text.isEmpty) {
-      return true;
-    } else {
-      return product.name.contains(
-        new RegExp(
-          _searchQuery.text,
-          caseSensitive: false,
-        ),
-      );
-    }
-  };
+  final TextEditingController _searchQuery = new TextEditingController();
 
   final List<PredicateTabWidget<Product>> _tabs = [
     new PredicateTabWidget(
@@ -88,6 +96,17 @@ class _ProductsPageState extends State<ProductsPage> {
       text: 'FAVOURITES',
     )
   ];
+
+  @override
+  void initState() {
+    super.initState();
+
+    _basketStore = listenToStore(basketStoreToken);
+
+    _products.forEach((Product product) {
+      if (_basketStore.contains(product)) product.isInBasket = true;
+    });
+  }
 
   List<Widget> _buildActions() {
     return [
@@ -127,6 +146,10 @@ class _ProductsPageState extends State<ProductsPage> {
                 },
                 onToggledInBasket: () {
                   setState(() {
+                    products[index].isInBasket
+                        ? removeProductFromBasket(products[index])
+                        : addProductToBasket(products[index]);
+
                     products[index].isInBasket = !products[index].isInBasket;
                   });
                 },

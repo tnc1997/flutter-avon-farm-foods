@@ -1,0 +1,4 @@
+enum ClearBasketDialogAction {
+  no,
+  yes,
+}

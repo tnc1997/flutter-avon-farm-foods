@@ -11,8 +11,54 @@
       <excludeFolder url="file://$MODULE_DIR$/packages" />
       <excludeFolder url="file://$MODULE_DIR$/test/packages" />
     </content>
+    <content url="file://$MODULE_DIR$/../flutter_flux">
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/main/java/com/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/main/java/com/yourcompany/flutterfluxexample/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/main/java/com/yourcompany/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/main/java/io/flutter/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/main/java/io/flutter/plugins/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/main/java/io/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/main/java/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/main/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/main/res/drawable/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/main/res/mipmap-hdpi/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/main/res/mipmap-mdpi/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/main/res/mipmap-xhdpi/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/main/res/mipmap-xxhdpi/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/main/res/mipmap-xxxhdpi/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/main/res/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/main/res/values/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/app/src/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/gradle/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/gradle/wrapper/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/android/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/ios/Flutter/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/ios/Runner.xcodeproj/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/ios/Runner.xcodeproj/project.xcworkspace/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/ios/Runner.xcodeproj/xcshareddata/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/ios/Runner.xcodeproj/xcshareddata/xcschemes/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/ios/Runner.xcworkspace/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/ios/Runner/Assets.xcassets/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/ios/Runner/Base.lproj/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/ios/Runner/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/ios/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/lib/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/example/test/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/test/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/../flutter_flux/tool/packages" />
+    </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Dart SDK" level="project" />
     <orderEntry type="library" name="Flutter Plugins" level="project" />
+    <orderEntry type="library" name="Dart Packages" level="project" />
   </component>
 </module>
