@@ -27,7 +27,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     return new Card(
       child: new Column(
         children: <Widget>[
-          new Image.network(
+          new Image.asset(
             widget.product.url,
             fit: BoxFit.cover,
           ),

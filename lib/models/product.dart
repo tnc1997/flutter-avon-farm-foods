@@ -4,6 +4,7 @@ class Product implements Comparable<Product> {
     this.id,
     this.isFavourite = false,
     this.isInBasket = false,
+    this.isPopular = false,
     this.name,
     this.price,
     this.quantity = 0,
@@ -12,6 +13,7 @@ class Product implements Comparable<Product> {
 
   final String description;
   final int id;
+  final bool isPopular;
   final String name;
   final double price;
   final String url;
