@@ -114,9 +114,15 @@ class _ProductsPageState extends State<ProductsPage>
                 },
                 onToggledInBasket: () {
                   setState(() {
-                    products[index].isInBasket
-                        ? removeProductFromBasket(products[index])
-                        : addProductToBasket(products[index]);
+                    if (products[index].isInBasket) {
+                      removeProductFromBasket(products[index]);
+
+                      products[index].quantity = 0;
+                    } else {
+                      products[index].quantity = 1;
+
+                      addProductToBasket(products[index]);
+                    }
 
                     products[index].isInBasket = !products[index].isInBasket;
                   });

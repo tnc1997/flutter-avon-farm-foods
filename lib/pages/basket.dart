@@ -6,6 +6,7 @@ import 'package:avon_farm_foods/widgets/drawer.dart';
 import 'package:avon_farm_foods/widgets/product_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_flux/flutter_flux.dart';
+import 'package:numberpicker/numberpicker.dart';
 
 class BasketPage extends StatefulWidget {
   @override
@@ -26,14 +27,21 @@ class _BasketPageState extends State<BasketPage>
     _products = _basketStore.products;
   }
 
-  List<Widget> _buildActions() {
-    return [
+  AppBar _buildAppBar() {
+    return new AppBar(
+      actions: _buildAppBarActions(),
+      title: new Text('Basket'),
+    );
+  }
+
+  List<Widget> _buildAppBarActions() {
+    return <Widget>[
       new IconButton(
         icon: new Icon(Icons.delete),
         onPressed: () {
           showDialog(
             context: context,
-            child: _buildDialog(),
+            child: _buildClearBasketDialog(),
           ).then((value) {
             if (value == ClearBasketDialogAction.yes) clearBasket();
           });
@@ -48,23 +56,16 @@ class _BasketPageState extends State<BasketPage>
     ];
   }
 
-  AppBar _buildAppBar() {
-    return new AppBar(
-      actions: _buildActions(),
-      title: new Text('Basket'),
-    );
-  }
-
-  AlertDialog _buildDialog() {
+  AlertDialog _buildClearBasketDialog() {
     return new AlertDialog(
-      actions: _buildDialogActions(),
+      actions: _buildClearBasketDialogActions(),
       content: new Text('Are you sure you want to clear your basket?'),
       title: new Text('Clear Basket'),
     );
   }
 
-  List<Widget> _buildDialogActions() {
-    return [
+  List<Widget> _buildClearBasketDialogActions() {
+    return <Widget>[
       new ButtonTheme.bar(
         child: new ButtonBar(
           children: <Widget>[
@@ -76,7 +77,7 @@ class _BasketPageState extends State<BasketPage>
     ];
   }
 
-  FlatButton _buildDialogButton(String text, ClearBasketDialogAction action) {
+  FlatButton _buildDialogButton(String text, dynamic action) {
     return new FlatButton(
       child: new Text(text),
       onPressed: () {
@@ -88,10 +89,28 @@ class _BasketPageState extends State<BasketPage>
     );
   }
 
+  NumberPickerDialog _buildEditQuantityDialog(int quantity) {
+    return new NumberPickerDialog.integer(
+      initialIntegerValue: quantity,
+      maxValue: 99,
+      minValue: 1,
+      title: new Text('Edit Quantity'),
+    );
+  }
+
   void _handleBasketStoreChanged(BasketStore basketStore) {
     _products = basketStore.products;
 
     setState(() {});
+  }
+
+  void _onQuantityPressed(Product product) {
+    showDialog<int>(
+      child: _buildEditQuantityDialog(product.quantity),
+      context: context,
+    ).then((int quantity) {
+      product.quantity = quantity;
+    });
   }
 
   @override
@@ -101,7 +120,10 @@ class _BasketPageState extends State<BasketPage>
       body: new ListView(
         children: _products.map((Product product) {
           return new DismissibleListTileWidget(
-            child: new ProductListTileWidget(product: product),
+            child: new ProductListTileWidget(
+              onQuantityPressed: () => _onQuantityPressed(product),
+              product: product,
+            ),
             dismissedSnackBar: new SnackBar(
               action: new SnackBarAction(
                 label: 'UNDO',
