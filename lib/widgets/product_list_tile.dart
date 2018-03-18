@@ -3,8 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ProductListTileWidget extends StatelessWidget {
-  ProductListTileWidget({Key key, @required this.product}) : super(key: key);
+  ProductListTileWidget({
+    Key key,
+    @required this.onQuantityPressed,
+    @required this.product,
+  })
+      : super(key: key);
 
+  final VoidCallback onQuantityPressed;
   final Product product;
 
   @override
@@ -18,6 +24,10 @@ class ProductListTileWidget extends StatelessWidget {
       ),
       subtitle: new Text('£${product.price}'),
       title: new Text(product.name),
+      trailing: new FlatButton(
+        child: new Text('${product.quantity}'),
+        onPressed: onQuantityPressed,
+      ),
     );
   }
 }
