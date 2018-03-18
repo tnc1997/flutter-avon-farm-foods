@@ -15,6 +15,17 @@ class ProductsPage extends StatefulWidget {
 class _ProductsPageState extends State<ProductsPage>
     with StoreWatcherMixin<ProductsPage> {
   _ProductsPageState() {
+    _products = new List<Product>.generate(999, (int index) {
+      return new Product(
+        description: 'Insert product description here.',
+        id: index + 1,
+        isPopular: (index + 1) % 100 == 0,
+        name: 'Product ${index + 1}',
+        price: 1.99,
+        url: 'images/home.jpg',
+      );
+    });
+
     _searchQueryPredicate = (Product product) {
       if (_searchQuery.text.isEmpty) {
         return true;
@@ -31,63 +42,20 @@ class _ProductsPageState extends State<ProductsPage>
 
   BasketStore _basketStore;
   bool _isSearching = false;
+  List<Product> _products;
   Predicate<Product> _searchQueryPredicate;
-
-  final List<Product> _products = [
-    new Product(
-      description:
-          'Tender pieces of chicken in a mildly spiced curry sauce. Served with fluffy white rice.',
-      id: 128,
-      name: 'Hearty Chicken Curry',
-      price: 4.45,
-      url:
-          'https://www.wiltshirefarmfoods.com/wff/media/Products/128_Hearty_Chicken_Curry_plated.jpg',
-    ),
-    new Product(
-      description:
-          'Bitesize pieces of tender chicken in rich gravy. Served with soft boiled potatoes, cauliflower, swede and carrots.',
-      id: 187,
-      name: 'Extra Tender Chicken in Gravy',
-      price: 4.25,
-      url:
-          'https://www.wiltshirefarmfoods.com/wff/media/Products/187_Extra_Tender_Chicken_in_Gravy_plated.jpg',
-    ),
-    new Product(
-      description:
-          'Tender chicken in gravy, topped with shortcrust pastry. Served with mashed potato, cauliflower, carrots and green beans.',
-      id: 252,
-      name: 'Chicken & Vegetable Pie',
-      price: 3.15,
-      url:
-          'https://www.wiltshirefarmfoods.com/wff/media/Products/252_Chicken_Vegetable_Pie_plated.jpg',
-    ),
-    new Product(
-      description:
-          'Steam roasted chicken breast in rich gravy. Served with parsley boiled potatoes, sliced carrots and peas.',
-      id: 257,
-      name: 'Chicken Breast',
-      price: 3.85,
-      url:
-          'https://www.wiltshirefarmfoods.com/wff/media/Products/257_Chicken_Breast_plated.jpg',
-    ),
-    new Product(
-      description:
-          'Turkey with sage stuffing in gravy. Served with roast potatoes, mashed carrots and swede.',
-      id: 273,
-      isFavourite: true,
-      name: 'Turkey with Stuffing',
-      price: 4.25,
-      url:
-          'https://www.wiltshirefarmfoods.com/wff/media/Products/273_Turkey_with_Stuffing_plated.jpg',
-    ),
-  ];
 
   final TextEditingController _searchQuery = new TextEditingController();
 
   final List<PredicateTabWidget<Product>> _tabs = [
     new PredicateTabWidget(
-      icon: new Icon(Icons.thumb_up),
+      icon: new Icon(Icons.list),
       predicate: (Product product) => true,
+      text: 'ALL',
+    ),
+    new PredicateTabWidget(
+      icon: new Icon(Icons.thumb_up),
+      predicate: (Product product) => product.isPopular,
       text: 'POPULAR',
     ),
     new PredicateTabWidget(
