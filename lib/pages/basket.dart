@@ -50,7 +50,7 @@ class _BasketPageState extends State<BasketPage>
       ),
       new IconButton(
         icon: new Icon(Icons.payment),
-        onPressed: null,
+        onPressed: () => Navigator.of(context).pushNamed('/checkout'),
         tooltip: 'Enter Checkout',
       ),
     ];
