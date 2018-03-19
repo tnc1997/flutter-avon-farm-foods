@@ -1,4 +1,5 @@
 import 'package:avon_farm_foods/pages/basket.dart';
+import 'package:avon_farm_foods/pages/checkout.dart';
 import 'package:avon_farm_foods/pages/home.dart';
 import 'package:avon_farm_foods/pages/products.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
       home: new HomePage(),
       routes: <String, WidgetBuilder>{
         '/basket': (BuildContext context) => new BasketPage(),
+        '/checkout': (BuildContext context) => new CheckoutPage(),
         '/products': (BuildContext context) => new ProductsPage(),
       },
       theme: new ThemeData.dark(),
