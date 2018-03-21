@@ -94,6 +94,26 @@ class _ProductsPageState extends State<ProductsPage>
     );
   }
 
+  AppBar _buildSearchBar() {
+    return new AppBar(
+      bottom: _buildTabBar(),
+      leading: new BackButton(),
+      title: new TextField(
+        autofocus: true,
+        controller: _searchQuery,
+        decoration: new InputDecoration(
+          hintText: 'Search by product name',
+        ),
+      ),
+    );
+  }
+
+  TabBar _buildTabBar() {
+    return new TabBar(
+      tabs: _tabs,
+    );
+  }
+
   TabBarView _buildTabBarView() {
     return new TabBarView(
       children: _tabs.map((PredicateTabWidget<Product> tab) {
@@ -139,27 +159,6 @@ class _ProductsPageState extends State<ProductsPage>
           ),
         );
       }).toList(),
-    );
-  }
-
-  AppBar _buildSearchBar() {
-    return new AppBar(
-      bottom: _buildTabBar(),
-      leading: new BackButton(),
-      title: new TextField(
-        autofocus: true,
-        controller: _searchQuery,
-        decoration: new InputDecoration(
-          hintText: 'Search by product name',
-        ),
-      ),
-    );
-  }
-
-  TabBar _buildTabBar() {
-    return new TabBar(
-      indicatorColor: Theme.of(context).iconTheme.color,
-      tabs: _tabs,
     );
   }
 
