@@ -1,4 +1,5 @@
 import 'package:avon_farm_foods/models/checkout.dart';
+import 'package:avon_farm_foods/widgets/form_section_divider.dart';
 import 'package:flutter/material.dart';
 
 class CheckoutPage extends StatefulWidget {
@@ -30,7 +31,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       child: new SingleChildScrollView(
         child: new Column(
           children: <Widget>[
-            _buildFormSectionDivider('Personal Details'),
+            new FormSectionDividerWidget(title: 'Personal Details'),
             new Container(
               child: new Column(
                 children: <Widget>[
@@ -60,7 +61,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ),
               padding: _formSectionPadding,
             ),
-            _buildFormSectionDivider('Delivery Details'),
+            new FormSectionDividerWidget(title: 'Delivery Details'),
             new Container(
               child: new Column(
                 children: <Widget>[
@@ -104,7 +105,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ),
               padding: _formSectionPadding,
             ),
-            _buildFormSectionDivider('Payment Details'),
+            new FormSectionDividerWidget(title: 'Payment Details'),
             new Container(
               child: new Column(
                 children: <Widget>[
@@ -167,25 +168,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
         ),
       ),
       key: _formKey,
-    );
-  }
-
-  Container _buildFormSectionDivider(String text) {
-    return new Container(
-      child: new Container(
-        child: new Text(
-          text,
-          style: new TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        padding: new EdgeInsets.symmetric(vertical: 16.0),
-      ),
-      decoration: new BoxDecoration(
-        color: Theme.of(context).dividerColor,
-      ),
     );
   }
 

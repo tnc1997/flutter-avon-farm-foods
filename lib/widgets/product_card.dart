@@ -56,7 +56,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                   icon: new Icon(
                     Icons.shopping_basket,
                     color: widget.product.isInBasket
-                        ? Colors.white
+                        ? Theme.of(context).textTheme.title.color
                         : Theme.of(context).disabledColor,
                   ),
                   onPressed: widget.onToggledInBasket,
