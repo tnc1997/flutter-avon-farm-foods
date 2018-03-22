@@ -1,13 +1,17 @@
 import 'package:avon_farm_foods/models/checkout.dart';
+import 'package:avon_farm_foods/stores/basket.dart';
 import 'package:avon_farm_foods/widgets/form_section_divider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_flux/flutter_flux.dart';
 
 class CheckoutPage extends StatefulWidget {
   @override
   _CheckoutPageState createState() => new _CheckoutPageState();
 }
 
-class _CheckoutPageState extends State<CheckoutPage> {
+class _CheckoutPageState extends State<CheckoutPage>
+    with StoreWatcherMixin<CheckoutPage> {
+  BasketStore _basketStore;
   Checkout _checkout = new Checkout();
   bool _shouldAutoValidate = false;
 
@@ -19,9 +23,27 @@ class _CheckoutPageState extends State<CheckoutPage> {
     16.0,
   );
 
+  @override
+  void initState() {
+    super.initState();
+
+    _basketStore = listenToStore(basketStoreToken);
+  }
+
   AppBar _buildAppBar() {
     return new AppBar(
       title: new Text('Checkout'),
+      actions: <Widget>[
+        new Column(
+          children: [
+            new Container(
+              child: new Text('£${_basketStore.total.toStringAsFixed(2)}'),
+              padding: new EdgeInsets.only(right: 8.0),
+            ),
+          ],
+          mainAxisAlignment: MainAxisAlignment.center,
+        ),
+      ],
     );
   }
 

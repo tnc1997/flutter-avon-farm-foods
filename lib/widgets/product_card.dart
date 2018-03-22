@@ -38,7 +38,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                 style: new TextStyle(fontSize: 14.0),
               ),
             ),
-            subtitle: new Text('£${widget.product.price.toString()}'),
+            subtitle: new Text('£${widget.product.price.toStringAsFixed(2)}'),
             title: new Text(
               widget.product.name,
               maxLines: 1,
