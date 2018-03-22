@@ -22,7 +22,7 @@ class ProductListTileWidget extends StatelessWidget {
           style: new TextStyle(fontSize: 14.0),
         ),
       ),
-      subtitle: new Text('£${product.price}'),
+      subtitle: new Text('£${product.price.toStringAsFixed(2)}'),
       title: new Text(product.name),
       trailing: new FlatButton(
         child: new Text('${product.quantity}'),

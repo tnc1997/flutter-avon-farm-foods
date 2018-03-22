@@ -21,9 +21,9 @@ class BasketStore extends Store {
 
   bool get isEmpty => _products.isEmpty;
   List<Product> get products => new List.unmodifiable(_products);
-  double get totalPrice {
+  double get total {
     return _products.map((Product product) {
-      return product.price;
+      return product.price * product.quantity;
     }).reduce((double accumulator, double currentValue) {
       return accumulator + currentValue;
     });

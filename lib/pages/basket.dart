@@ -38,19 +38,23 @@ class _BasketPageState extends State<BasketPage>
     return <Widget>[
       new IconButton(
         icon: new Icon(Icons.delete),
-        onPressed: () {
-          showDialog(
-            context: context,
-            child: _buildClearBasketDialog(),
-          ).then((value) {
-            if (value == ClearBasketDialogAction.yes) clearBasket();
-          });
-        },
+        onPressed: _basketStore.isEmpty
+            ? null
+            : () {
+                showDialog(
+                  context: context,
+                  child: _buildClearBasketDialog(),
+                ).then((value) {
+                  if (value == ClearBasketDialogAction.yes) clearBasket();
+                });
+              },
         tooltip: 'Clear Basket',
       ),
       new IconButton(
         icon: new Icon(Icons.payment),
-        onPressed: () => Navigator.of(context).pushNamed('/checkout'),
+        onPressed: _basketStore.isEmpty
+            ? null
+            : () => Navigator.of(context).pushNamed('/checkout'),
         tooltip: 'Enter Checkout',
       ),
     ];
